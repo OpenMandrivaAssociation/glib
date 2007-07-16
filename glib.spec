@@ -4,7 +4,7 @@
 Summary: A library of handy utility functions
 Name: glib
 Version: 1.2.10
-Release: %mkrel 17
+Release: %mkrel 18
 License: LGPL
 Group: System/Libraries
 Source: ftp://ftp.gtk.org/pub/gtk/v1.2/%{name}-%{version}.tar.bz2
@@ -42,7 +42,7 @@ will depend on this library.
 Summary: Main library for glib
 Group: System/Libraries
 Provides: glib = %{version}-%{release}
-Obsoletes: glib
+Obsoletes: glib < %{version}-%{release}
 
 %description -n %{libname}
 This package contains the library needed to run programs dynamically
@@ -55,7 +55,7 @@ Requires: %{libname} = %{version}
 Requires: pkgconfig
 Provides: %{name}-devel = %{version}-%{release}
 Provides: lib%{name}-devel = %{version}-%{release}
-Obsoletes: glib-devel
+Obsoletes: glib-devel < %{version}-%{release}
 
 %description -n %{libname}-devel
 Static libraries and header files for the support library for the GIMP's X
@@ -71,12 +71,15 @@ useful data structures.
 %patch4 -p1 -b .pic
 %patch5 -p1 -b .libtool
 automake-1.4
-autoconf
+autoconf-2.13
+libtoolize --copy --force
 
 %build
 %configure
 
 %make
+
+%check
 make check
 
 %install
@@ -116,5 +119,3 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/*
 %multiarch %{multiarch_bindir}/*
 %{_infodir}/%{name}*
-
-

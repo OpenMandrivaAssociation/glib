@@ -25,7 +25,6 @@ BuildRequires: automake1.4, autoconf2.1
 %else
 BuildRequires: automake
 %endif
-BuildRoot: %{_tmppath}/%{name}-%{version}-root
 URL: http://www.gtk.org
 
 %description

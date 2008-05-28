@@ -4,7 +4,7 @@
 Summary: A library of handy utility functions
 Name: glib
 Version: 1.2.10
-Release: %mkrel 19
+Release: %mkrel 20
 License: LGPL
 Group: System/Libraries
 Source: ftp://ftp.gtk.org/pub/gtk/v1.2/%{name}-%{version}.tar.bz2
@@ -20,6 +20,8 @@ Patch3: glib-1.2.10-underquoted.patch
 Patch4: glib-1.2.10-pic.patch
 # (gb) 1.2.10-17mdv use ancient libtool 1.4 with lib64 fixes
 Patch5: glib-1.2.10-libtool.patch
+# (Anssi 05/2008) Fix underlinking
+Patch6: glib-1.2.10-underlinking.patch
 %if %{mdkversion} >= 1010
 BuildRequires: automake1.4, autoconf2.1
 %else
@@ -70,6 +72,7 @@ useful data structures.
 %patch3 -p1 -b .underquoted
 %patch4 -p1 -b .pic
 %patch5 -p1 -b .libtool
+%patch6 -p1 -b .underlink
 automake-1.4
 autoconf-2.13
 libtoolize --copy --force

@@ -4,7 +4,7 @@
 Summary: A library of handy utility functions
 Name: glib
 Version: 1.2.10
-Release: %mkrel 23
+Release: %mkrel 24
 License: LGPL
 Group: System/Libraries
 Source: ftp://ftp.gtk.org/pub/gtk/v1.2/%{name}-%{version}.tar.bz2
@@ -23,6 +23,7 @@ Patch5: glib-1.2.10-libtool.patch
 # (Anssi 05/2008) Fix underlinking
 Patch6: glib-1.2.10-underlinking.patch
 Patch7: glib-1.2.10-format_not_a_string_literal_and_no_format_arguments.diff
+Patch8: glib_divert.patch
 %if %{mdkversion} >= 1010
 BuildRequires: automake1.4, autoconf2.1
 %else
@@ -75,13 +76,15 @@ useful data structures.
 %patch5 -p1 -b .libtool
 %patch6 -p1 -b .underlink
 %patch7 -p1 -b .format_not_a_string_literal_and_no_format_arguments
+%patch8 -p1 -b .divert
 
-automake-1.4
-autoconf-2.13
+aclocal-1.4
 libtoolize --copy --force
+automake-1.4
+autoconf
 
 %build
-%configure
+%configure2_5x
 
 %make
 

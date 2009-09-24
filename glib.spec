@@ -80,7 +80,8 @@ useful data structures.
 
 aclocal-1.4
 libtoolize --copy --force
-automake-1.4
+rm -f config.{guess,sub}
+automake-1.4 -a -c
 autoconf
 
 %build

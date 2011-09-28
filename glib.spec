@@ -24,7 +24,7 @@ Patch5: glib-1.2.10-libtool.patch
 Patch6: glib-1.2.10-underlinking.patch
 Patch7: glib-1.2.10-format_not_a_string_literal_and_no_format_arguments.diff
 Patch8: glib_divert.patch
-BuildRequires: automake1.4, autoconf2.1
+Patch9: glib-fix-automake.patch
 BuildRequires: libtool
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 URL: http://www.gtk.org
@@ -65,20 +65,12 @@ useful data structures.
 
 %prep
 %setup -q
-%patch0 -p1 -b .isowarnings
-%patch1 -p1 -b .libdir
-%patch2 -p1 -b .gcc34
-%patch3 -p1 -b .underquoted
-%patch4 -p1 -b .pic
-%patch5 -p1 -b .libtool
-%patch6 -p1 -b .underlink
-%patch7 -p1 -b .format_not_a_string_literal_and_no_format_arguments
-%patch8 -p1 -b .divert
+%apply_patches
 
-aclocal-1.4
-libtoolize --copy --force
+aclocal
+libtoolize --install --force
 rm -f config.{guess,sub}
-automake-1.4 -a -c
+automake --foreign -a -c
 autoconf
 
 %build
@@ -129,4 +121,5 @@ rm -rf $RPM_BUILD_ROOT
 %{_datadir}/aclocal/*
 %{_bindir}/*
 %multiarch %{multiarch_bindir}/*
+
 %{_infodir}/%{name}*

@@ -4,7 +4,7 @@
 Summary: A library of handy utility functions
 Name: glib
 Version: 1.2.10
-Release: %mkrel 24
+Release: %mkrel 25
 License: LGPL
 Group: System/Libraries
 Source: ftp://ftp.gtk.org/pub/gtk/v1.2/%{name}-%{version}.tar.bz2

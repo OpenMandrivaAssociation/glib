@@ -24,11 +24,8 @@ Patch5: glib-1.2.10-libtool.patch
 Patch6: glib-1.2.10-underlinking.patch
 Patch7: glib-1.2.10-format_not_a_string_literal_and_no_format_arguments.diff
 Patch8: glib_divert.patch
-%if %{mdkversion} >= 1010
 BuildRequires: automake1.4, autoconf2.1
-%else
-BuildRequires: automake
-%endif
+BuildRequires: libtool
 BuildRoot: %{_tmppath}/%{name}-%{version}-root
 URL: http://www.gtk.org
 

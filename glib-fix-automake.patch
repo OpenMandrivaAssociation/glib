@@ -1,0 +1,21 @@
+--- glib-1.2.10/gmodule/Makefile.am.automake	2011-09-28 12:55:32.179166712 +0200
++++ glib-1.2.10/gmodule/Makefile.am	2011-09-28 12:55:40.306167836 +0200
+@@ -40,7 +40,7 @@ libgplugin_b_la_LDFLAGS = @G_MODULE_LDFL
+ libgplugin_b_la_LIBADD = @G_MODULE_LIBS@ $(libglib)
+ 
+ noinst_PROGRAMS = testgmodule
+-testgmodule_LDFLAGS += @G_MODULE_LDFLAGS@
++testgmodule_LDFLAGS = @G_MODULE_LDFLAGS@
+ testgmodule_LDADD = libgmodule.la $(libglib) @G_MODULE_LIBS@
+ 
+ .PHONY: files release
+--- glib-1.2.10/Makefile.am.automake	2011-09-28 12:59:04.229262133 +0200
++++ glib-1.2.10/Makefile.am	2011-09-28 12:59:24.706278380 +0200
+@@ -13,7 +13,6 @@ glib-config: glib-config.in
+ 
+ INCLUDES = -DG_LOG_DOMAIN=g_log_domain_glib @GLIB_DEBUG_FLAGS@
+ 
+-AM_CFLAGS = -prefer-pic
+ 
+ EXTRA_DIST = \
+ 	glib.m4			\

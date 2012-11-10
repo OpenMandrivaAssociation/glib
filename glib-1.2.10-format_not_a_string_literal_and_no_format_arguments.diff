@@ -1,0 +1,24 @@
+diff -Naurp glib-1.2.10/grel.c glib-1.2.10.oden/grel.c
+--- glib-1.2.10/grel.c	1999-03-14 21:03:50.000000000 +0100
++++ glib-1.2.10.oden/grel.c	2008-12-22 14:12:01.000000000 +0100
+@@ -413,7 +413,7 @@ g_relation_print_one (gpointer tuple_key
+     }
+   
+   g_string_append (gstring, "]");
+-  g_log (g_log_domain_glib, G_LOG_LEVEL_INFO, gstring->str);
++  g_log (g_log_domain_glib, G_LOG_LEVEL_INFO, "%s", gstring->str);
+   g_string_free (gstring, TRUE);
+ }
+ 
+diff -Naurp glib-1.2.10/testglib.c glib-1.2.10.oden/testglib.c
+--- glib-1.2.10/testglib.c	1999-02-24 07:13:58.000000000 +0100
++++ glib-1.2.10.oden/testglib.c	2008-12-22 14:12:44.000000000 +0100
+@@ -901,7 +901,7 @@ main (int   argc,
+   g_warning ("harmless warning with parameters: %d %s %#x", 42, "Boo", 12345);
+   g_message ("the next warning is a test:");
+   string = NULL;
+-  g_print (string);
++  g_print ("%s", string);
+ 
+   g_print ("checking endian macros (host is ");
+ #if G_BYTE_ORDER == G_BIG_ENDIAN

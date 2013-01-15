@@ -8,7 +8,7 @@ Release:	26
 License:	LGPL
 Group:		System/Libraries
 URL:		http://www.gtk.org
-Source:		ftp://ftp.gtk.org/pub/gtk/v1.2/%{name}-%{version}.tar.bz2
+Source0:	ftp://ftp.gtk.org/pub/gtk/v1.2/%{name}-%{version}.tar.bz2
 # (fc) 1.2.10-3mdk Suppress warnings about varargs macros for -pedantic (Rawhide)
 Patch0:		glib-1.2.10-isowarning.patch
 # (fc) 1.2.10-5mdk don't set -L/usr/lib in glib-config
@@ -26,6 +26,7 @@ Patch6:		glib-1.2.10-underlinking.patch
 Patch7:		glib-1.2.10-format_not_a_string_literal_and_no_format_arguments.diff
 Patch8:		glib_divert.patch
 Patch9:		glib-fix-automake.patch
+Patch10:	glib-1.2.10-automake-1.13.patch
 BuildRequires:	libtool
 
 %description

@@ -1,14 +1,18 @@
-%define libname  %mklibname %{name} %{major}
-%define major    1.2
+%define api	1.2
+%define major	0
+%define libname		%mklibname %{name} %{api} %{major}
+%define libgmodule	%mklibname gmodule %{api} %{major}
+%define libgthread	%mklibname gthread %{api} %{major}
+%define devname		%mklibname %{name} -d %{api}
 
 Summary:	A library of handy utility functions
 Name:		glib
 Version:	1.2.10
-Release:	26
-License:	LGPL
+Release:	27
+License:	LGPLv2.1
 Group:		System/Libraries
-URL:		http://www.gtk.org
-Source0:	ftp://ftp.gtk.org/pub/gtk/v1.2/%{name}-%{version}.tar.bz2
+Url:		http://www.gtk.org
+Source0:	ftp://ftp.gtk.org/pub/gtk/v1.2/%{name}-%{version}.tar.gz
 # (fc) 1.2.10-3mdk Suppress warnings about varargs macros for -pedantic (Rawhide)
 Patch0:		glib-1.2.10-isowarning.patch
 # (fc) 1.2.10-5mdk don't set -L/usr/lib in glib-config
@@ -43,19 +47,39 @@ will depend on this library.
 Summary:	Main library for glib
 Group:		System/Libraries
 Provides:	glib = %{version}-%{release}
+Obsoletes:	%{_lib}glib1.2 < 1.2.10-27
 
 %description -n %{libname}
-This package contains the library needed to run programs dynamically
+This package contains a library needed to run programs dynamically
 linked with the glib.
 
-%package -n %{libname}-devel
+%package -n %{libgmodule}
+Summary:	Main library for glib
+Group:		System/Libraries
+Obsoletes:	%{_lib}glib1.2 < 1.2.10-27
+
+%description -n %{libgmodule}
+This package contains a library needed to run programs dynamically
+linked with the glib.
+
+%package -n %{libgthread}
+Summary:	Main library for glib
+Group:		System/Libraries
+Obsoletes:	%{_lib}glib1.2 < 1.2.10-27
+
+%description -n %{libgthread}
+This package contains a library needed to run programs dynamically
+linked with the glib.
+
+%package -n %{devname}
 Summary:	GIMP Toolkit and GIMP Drawing Kit support library
 Group:		Development/C
 Requires:	%{libname} = %{version}
+Requires:	%{libgmodule} = %{version}
+Requires:	%{libgthread} = %{version}
 Provides:	%{name}-devel = %{version}-%{release}
-Provides:	lib%{name}-devel = %{version}-%{release}
 
-%description -n %{libname}-devel
+%description -n %{devname}
 Static libraries and header files for the support library for the GIMP's X
 libraries, which are available as public libraries.  GLIB includes generally
 useful data structures.
@@ -81,10 +105,15 @@ make check
 %makeinstall_std
 
 %files -n %{libname}
-%doc COPYING
-%{_libdir}/lib*.so.*
+%{_libdir}/libglib-%{api}.so.%{major}*
 
-%files -n %{libname}-devel
+%files -n %{libgmodule}
+%{_libdir}/libgmodule-%{api}.so.%{major}*
+
+%files -n %{libgthread}
+%{_libdir}/libgthread-%{api}.so.%{major}*
+
+%files -n %{devname}
 %doc AUTHORS ChangeLog NEWS README COPYING docs/*.html
 %{_libdir}/lib*.so
 %{_libdir}/pkgconfig/*
@@ -94,76 +123,4 @@ make check
 %{_datadir}/aclocal/*
 %{_bindir}/*
 %{_infodir}/%{name}*
-
-
-%changelog
-* Wed Sep 28 2011 Götz Waschk <waschk@mandriva.org> 1.2.10-25mdv2012.0
-+ Revision: 701661
-- fix build with modern automake
-- update build deps
-- rebuild
-
-* Thu Sep 24 2009 Olivier Blin <blino@mandriva.org> 1.2.10-24mdv2011.0
-+ Revision: 448436
-- fix build on x86_64 (using a similar config.{guess,sub} hack than the one done in freetype by rtp)
-- fix build with libtool and autotools stuff, by taking most of
-  changes from newer glib autotools stuff (from Arnaud Patard)
-
-  + Thierry Vignaud <tv@mandriva.org>
-    - rebuild
-
-* Mon Dec 22 2008 Oden Eriksson <oeriksson@mandriva.com> 1.2.10-22mdv2009.1
-+ Revision: 317534
-- fix build with -Werror=format-security (P7)
-
-* Wed Aug 06 2008 Thierry Vignaud <tv@mandriva.org> 1.2.10-21mdv2009.0
-+ Revision: 264552
-- rebuild early 2009.0 package (before pixel changes)
-
-  + Pixel <pixel@mandriva.com>
-    - do not call ldconfig in %%post/%%postun, it is now handled by filetriggers
-
-* Wed May 28 2008 Anssi Hannula <anssi@mandriva.org> 1.2.10-20mdv2009.0
-+ Revision: 212166
-- fix underlinking (underlinking.patch)
-
-* Sat Jan 12 2008 Thierry Vignaud <tv@mandriva.org> 1.2.10-19mdv2008.1
-+ Revision: 150110
-- rebuild
-- kill re-definition of %%buildroot on Pixel's request
-
-  + Olivier Blin <blino@mandriva.org>
-    - restore BuildRoot
-
-* Mon Jul 16 2007 David Walluck <walluck@mandriva.org> 1.2.10-18mdv2008.0
-+ Revision: 52375
-- version Obsoletes
-- explicitly call autoconf-2.13
-- call libtoolize --copy --force
-- place make check inside %%check section
-- rebuild to add Provides: pkgconfig(gmodule)
-
-
-* Tue Dec 05 2006 Gwenole Beauchesne <gbeauchesne@mandriva.com> 1.2.10-17mdv2007.0
-+ Revision: 91240
-- use ancient libtool 1.4 with lib64 fixes
-- bunzip2 patches, use mkrel
-- Import glib
-
-* Sat Dec 31 2005 Mandriva Linux Team <http://www.mandrivaexpert.com/> 1.2.10-16mdk
-- Rebuild
-
-* Tue Feb 01 2005 Frederic Crozat <fcrozat@mandrakesoft.com> 1.2.10-15mdk 
-- Multiarch
-- fix rpmlint errors
-
-* Thu Sep 30 2004 Gwenole Beauchesne <gbeauchesne@mandrakesoft.com> 1.2.10-14mdk
-- build static glib library with PIC as pam modules need it
-
-* Sat Aug 14 2004 Frederic Crozat <fcrozat@mandrakesoft.com> 1.2.10-13mdk
-- Update patch2 to remove __const__ call 
-- Patch3 (Fedora) : fix underquoted m4 definitions
-
-* Fri Jul 09 2004 Frederic Crozat <fcrozat@mandrakesoft.com> 1.2.10-12mdk
-- Patch2 (Fedora): fix build with gcc 3.4
 

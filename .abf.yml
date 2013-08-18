@@ -1,2 +1,4 @@
+removed_sources:
+  glib-1.2.10.tar.bz2: 032bf2cd6e50546d31b6ab6dd0692b6392355815
 sources:
-  "glib-1.2.10.tar.bz2": 032bf2cd6e50546d31b6ab6dd0692b6392355815
+  glib-1.2.10.tar.gz: e5a9361c594608d152d5d9650154c2e3260b87fa

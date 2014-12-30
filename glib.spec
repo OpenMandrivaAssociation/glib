@@ -95,7 +95,9 @@ automake --foreign -a -c
 autoconf
 
 %build
-%configure2_5x --disable-static
+export CC=gcc
+export CXX=g++
+%configure --disable-static
 %make
 
 %check

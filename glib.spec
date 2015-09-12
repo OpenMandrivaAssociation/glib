@@ -8,7 +8,7 @@
 Summary:	A library of handy utility functions
 Name:		glib
 Version:	1.2.10
-Release:	35
+Release:	36
 License:	LGPLv2.1
 Group:		System/Libraries
 Url:		http://www.gtk.org

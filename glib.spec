@@ -4,6 +4,7 @@
 %define libgmodule	%mklibname gmodule %{api} %{major}
 %define libgthread	%mklibname gthread %{api} %{major}
 %define devname		%mklibname %{name} -d %{api}
+%define _disable_lto 1
 
 Summary:	A library of handy utility functions
 Name:		glib
@@ -31,6 +32,8 @@ Patch7:		glib-1.2.10-format_not_a_string_literal_and_no_format_arguments.diff
 Patch8:		glib_divert.patch
 Patch9:		glib-fix-automake.patch
 Patch10:	glib-1.2.10-automake-1.13.patch
+# Fedora - Workaround for different inline semantics between GNU89 and C99
+Patch11: glib-1.2.10-gcc5.patch
 BuildRequires:	libtool
 
 %description

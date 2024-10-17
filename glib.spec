@@ -12,7 +12,7 @@ Version:	1.2.10
 Release:	39
 License:	LGPLv2.1
 Group:		System/Libraries
-Url:		http://www.gtk.org
+Url:		https://www.gtk.org
 Source0:	ftp://ftp.gtk.org/pub/gtk/v1.2/%{name}-%{version}.tar.gz
 # (fc) 1.2.10-3mdk Suppress warnings about varargs macros for -pedantic (Rawhide)
 Patch0:		glib-1.2.10-isowarning.patch

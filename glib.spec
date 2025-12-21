@@ -34,6 +34,11 @@ Patch9:		glib-fix-automake.patch
 Patch10:	glib-1.2.10-automake-1.13.patch
 # Fedora - Workaround for different inline semantics between GNU89 and C99
 Patch11: glib-1.2.10-gcc5.patch
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	libtool
 
 %description
